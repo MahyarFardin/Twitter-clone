@@ -11,10 +11,11 @@ module.exports = {
       "lGray":"#AAB8C2",
       "elGray":"#E1E8ED",
       "eelGray":"#F5F8FA",
+      "white":"#ffffff"
     },
     fontSize:{
       "xxsm":"7px",
-      "xsm":"9px",
+      "xsm":"12px",
       'xs': '.75rem',
       'sm': '.875rem',
       'md': '1rem',

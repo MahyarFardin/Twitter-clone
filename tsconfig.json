@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "Components/EmailSignUpSnippet/EmailSignUpSnippet.component.tsx"  ],
   "exclude": [
     "node_modules"
   ]
