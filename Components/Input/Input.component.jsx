@@ -3,7 +3,7 @@ function Input(props) {
     <div>
       <input
         className={
-          props.classname +
+          props.className +
           " h-14 w-full my-3 border-[1px] opacity-50 indent-3 focus:outline-none focus:border-blue focus:opacity-100 focus:border-2 bg-black text-md rounded-sm"
         }
         type={props.type}
