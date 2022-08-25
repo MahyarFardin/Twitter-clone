@@ -1,6 +1,8 @@
 import { useState } from "react";
-import ESUSO from "../1ESUS/ESUSO.component";
 import { AiOutlineClose } from "react-icons/ai";
+import FirstPageButton from "../FirstPageButton/FirstPageButton";
+import ESUSO from "../1ESUS/ESUSO.component";
+import ESUST from "../2ESUS/ESUST.component";
 
 function EmailSignUpSnippet(props) {
   const [number, setNumber] = useState(1);
@@ -87,7 +89,7 @@ function EmailSignUpSnippet(props) {
 
   const handleChange = (event: any) => {
     console.log(event);
-    
+
     if (number === 1) {
       const name = event.target.className.split(" ")[0];
       setInformation((prev) => ({
@@ -105,8 +107,12 @@ function EmailSignUpSnippet(props) {
     }));
   };
 
+  const handleSubmit = () => {
+    setNumber((prev) => prev + 1);
+  };
+
   return (
-    <form className="w-[80%] h-full m-auto flex flex-col rounded-2xl bg-black">
+    <form className="w-[600px] h-[550px] m-auto flex flex-col rounded-2xl bg-black">
       <div
         onClick={props.onclick}
         className="gap-10 flex bg-black m-3 hover:cursor-pointer"
@@ -114,18 +120,35 @@ function EmailSignUpSnippet(props) {
         <AiOutlineClose size={25} className="my-auto" />
         <span className="font-bold text-xl">{`step ${number} of 5`}</span>
       </div>
-      {number === 1 && (
-        <ESUSO
+      <div className="px-16 py-5">
+        {number === 2 && (
+          <ESUSO
+            {...{
+              toggle: toggle,
+              handleChange: handleChange,
+              information: information,
+              monthes: monthes,
+              days: days,
+            }}
+          />
+        )}
+        {number === 1 && (
+          <ESUST
+            {...{
+              toggle: toggle,
+              handleChange: handleChange,
+              information: information,
+            }}
+          />
+        )}
+        <FirstPageButton
           {...{
-            toggle: toggle,
-            handleChange: handleChange,
-            information: information,
-            setInformation: setInformation,
-            monthes:monthes,
-            days:days
+            text: "Next",
+            classname:
+              "w-full h-12 bg-white text-black text-md font-bold border-[1px] border-elGray mb-5 ",
           }}
         />
-      )}
+      </div>
     </form>
   );
 }
