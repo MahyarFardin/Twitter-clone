@@ -1,11 +1,15 @@
 import { AiOutlineClose } from "react-icons/ai";
-import Link from "next/link";
 import { useState } from "react";
+import FirstPageButton from "../FirstPageButton/FirstPageButton";
 import Input from "../Input/Input.component";
 import DropDown from "../DropDown/DropDown.component";
 import { allYears } from "./years";
 
-function EmailSignUpSnippet() {
+function EmailSignUpSnippet(props) {
+  enum type {
+    Phone,
+    Email,
+  }
   const [number, setNumber] = useState(1);
   const [monthes, setMonthes] = useState([
     "January",
@@ -27,8 +31,8 @@ function EmailSignUpSnippet() {
   interface information {
     name: string;
     Phone: string;
-    email: string;
-    type:string;
+    Email: string;
+    type: string;
     date: {
       day: number;
       month: string;
@@ -36,35 +40,31 @@ function EmailSignUpSnippet() {
     };
   }
 
-  console.log(allYears);
-
   const [information, setInformation] = useState({
     name: "",
     Phone: "",
-    email:"",
-    type:"Phone",
-    date: {
-      day: "",
-      month: "January",
-      year: "",
-    },
+    Email: "",
+    type: type.Phone.toString(),
+    day: "",
+    month: "January",
+    year: "",
   });
 
   const assigner = () => {
     let day: number;
-    days = [];    
+    days = [];
 
     if (
-      information.date.month === "January" ||
-      information.date.month === "March" ||
-      information.date.month === "July" ||
-      information.date.month === "Agust" ||
-      information.date.month === "October" ||
-      information.date.month === "December" ||
-      information.date.month === "May"
+      information.month === "January" ||
+      information.month === "March" ||
+      information.month === "July" ||
+      information.month === "Agust" ||
+      information.month === "October" ||
+      information.month === "December" ||
+      information.month === "May"
     )
       day = 31;
-    else if (information.date.month === "February") day = 28;
+    else if (information.month === "February") day = 28;
     else day = 30;
 
     for (let i = 1; i <= day; i++) {
@@ -74,36 +74,56 @@ function EmailSignUpSnippet() {
 
   assigner();
 
-  const handleChange = () => {
-    console.log("test");
+  const handleChange = (event: any) => {
+    const name = event.target.className.split(" ")[0];
+    setInformation((prev) => ({
+      ...prev,
+      [name]: event.target.value,
+    }));
+  };
+
+  const toggle = () => {
+    setInformation((prev) => ({
+      ...prev,
+      type: +information.type === 0 ? "1" : "0",
+    }));
   };
 
   return (
-    <div className="w-[50%] h-2/3 m-auto flex flex-col rounded-md">
-      <div className="gap-10 fixed flex bg-black">
+    <form className="w-[80%] h-full m-auto flex flex-col rounded-2xl bg-black">
+      <div onClick={props.onclick} className="gap-10 flex bg-black m-3 hover:cursor-pointer">
         <AiOutlineClose size={25} className="my-auto" />
         <span className="font-bold text-xl">{`step ${number} of 5`}</span>
       </div>
-      <div className="mt-14 px-16">
+      <div className="mt-5 px-16">
         <h3 className="font-bold mb-8 text-4xl">create your account</h3>
         <Input
           {...{
             type: "text",
             handleChange: handleChange,
-            classname: "name",
+            classVame: "name",
             placeholder: "Name",
+            onChange: handleChange,
+            // value:
+            //   +information.type === 0 ? information.Phone : information.Email,
           }}
         />
+
         <Input
           {...{
             type: "text",
             handleChange: handleChange,
-            classname: information.type,
-            placeholder: information.type,
+            classVame: +information.type === 0 ? "Phone" : "Email",
+            placeholder: +information.type === 0 ? "Phone" : "Email",
+            onChange: handleChange,
+            // value:
+            //   +information.type === 0 ? information.Phone : information.Email,
           }}
         />
 
-          <h3 onClick={} className="text-blue text-end">Use email instead</h3>
+        <h3 onClick={toggle} className="text-blue text-end hover:cursor-pointer hover:underline">
+          Use email instead
+        </h3>
 
         <h4 className="font-bold mt-5">Date of birth</h4>
         <small className="opacity-50">
@@ -111,13 +131,29 @@ function EmailSignUpSnippet() {
           account is for a business, a pet, or something else.
         </small>
 
-        <div className="flex">
-          <DropDown items={days} onChange={handleChange} />
-          <DropDown items={monthes} onChange={handleChange} />
-          <DropDown items={allYears} onChange={handleChange} />
+        <div className="flex gap-2">
+          <DropDown
+            className={"month"}
+            items={monthes}
+            onChange={handleChange}
+          />
+          <DropDown className={"day"} items={days} onChange={handleChange} />
+          <DropDown
+            className={"year"}
+            items={allYears}
+            onChange={handleChange}
+          />
         </div>
+
+        <FirstPageButton
+          {...{
+            text: "Next",
+            classname:
+              "w-full h-12 bg-white text-black text-md font-bold border-[1px] border-elGray mb-5 ",
+          }}
+        />
       </div>
-    </div>
+    </form>
   );
 }
 

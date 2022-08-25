@@ -23,14 +23,16 @@ const handleClickGoogle = () => {
 };
 
 export default function Home() {
-  const [isOn, setIsOn] = useState(true);
+  const [isOn, setIsOn] = useState(false);
+
   const toggler = () => {
     setIsOn((prev) => !prev);
+    console.log(isOn);
   };
 
   return (
     <>
-      {/* <div className="grid grid-cols-2 h-screen w-screen gap-8">
+      <div className={"grid grid-cols-2 h-screen w-screen gap-8 z-0 "+(isOn===true ? "blur-sm":"")} >
         <div className="relative w-[100%] h-full">
           <Image
             alt="Picture of the author"
@@ -55,7 +57,7 @@ export default function Home() {
           <FirstPageButton
             {...{
               text: "Sign up with Google",
-              classname: "bg-white text-black text-sm font-bold",
+              classname: "w-72 h-9 bg-white text-black text-sm font-bold",
               onClick: handleClickGoogle,
             }}
           >
@@ -65,7 +67,7 @@ export default function Home() {
           <FirstPageButton
             {...{
               text: "Sign up with Apple",
-              classname: "bg-white text-black text-sm font-bold",
+              classname: "w-72 h-9 bg-white text-black text-sm font-bold",
             }}
           >
             <AiFillApple size={35} />
@@ -84,7 +86,7 @@ export default function Home() {
           <FirstPageButton
             {...{
               text: "Sign in with phone or email",
-              classname: "bg-blue text-white text-sm font-bold",
+              classname: "w-72 h-9 bg-blue text-white text-sm font-bold",
               onClick: toggler,
             }}
           ></FirstPageButton>
@@ -99,14 +101,15 @@ export default function Home() {
             {...{
               text: "Sign in",
               classname:
-                "bg-black text-blue text-sm font-bold border-[1px] border-elGray mb-5 ",
+                "w-72 h-9 bg-black text-blue text-sm font-bold border-[1px] border-elGray mb-5 ",
             }}
           ></FirstPageButton>
         </div>
-      </div> */}
+      </div>
+
       {isOn && (
-        <div>
-          <EmailSignUpSnippet />
+        <div className="absolute top-4 left-[20%] z-10 transpa">
+          <EmailSignUpSnippet onclick={toggler}/>
         </div>
       )}
     </>
