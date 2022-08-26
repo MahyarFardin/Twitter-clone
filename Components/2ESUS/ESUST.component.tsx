@@ -35,7 +35,7 @@ function ESUST({ handleChange, information }) {
             {...{
               type: "checkbox",
               handleChange: handleChange,
-              className: "MP my-0 h-5 w-5 ",
+              className: "GMOT my-0 h-5 w-5 ",
               onChange: handleChange,
               // value:
               //   +information.type === 0 ? information.Phone : information.Email
@@ -56,7 +56,7 @@ function ESUST({ handleChange, information }) {
             {...{
               type: "checkbox",
               handleChange: handleChange,
-              className: "MP my-0 h-5 w-5 ",
+              className: "PA my-0 h-5 w-5 ",
               onChange: handleChange,
               // value:
               //   +information.type === 0 ? information.Phone : information.Email
