@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineArrowLeft } from "react-icons/ai";
 import FirstPageButton from "../FirstPageButton/FirstPageButton";
 import ESUSO from "../1ESUS/ESUSO.component";
 import ESUST from "../2ESUS/ESUST.component";
@@ -107,21 +107,26 @@ function EmailSignUpSnippet(props) {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     setNumber((prev) => prev + 1);
   };
 
   return (
-    <form className="w-[600px] h-[550px] m-auto flex flex-col rounded-2xl bg-black">
+    <form onSubmit={handleSubmit} className="w-[600px] h-[500px] m-auto flex flex-col rounded-2xl bg-black">
       <div
         onClick={props.onclick}
-        className="gap-10 flex bg-black m-3 hover:cursor-pointer"
+        className="gap-10 w-full flex bg-black m-3 hover:cursor-pointer"
       >
-        <AiOutlineClose size={25} className="my-auto" />
+        {number === 1 ? (
+          <AiOutlineClose size={25} className="my-auto" />
+        ) : (
+          <AiOutlineArrowLeft size={25} className="my-auto" />
+        )}
         <span className="font-bold text-xl">{`step ${number} of 5`}</span>
       </div>
-      <div className="px-16 py-5">
-        {number === 2 && (
+      <div className="px-16 py-5 overflow-scroll">
+        {number === 1 && (
           <ESUSO
             {...{
               toggle: toggle,
@@ -132,7 +137,7 @@ function EmailSignUpSnippet(props) {
             }}
           />
         )}
-        {number === 1 && (
+        {number === 2 && (
           <ESUST
             {...{
               toggle: toggle,
@@ -141,6 +146,8 @@ function EmailSignUpSnippet(props) {
             }}
           />
         )}
+      </div>
+      <div className="px-16">
         <FirstPageButton
           {...{
             text: "Next",

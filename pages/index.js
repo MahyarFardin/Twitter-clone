@@ -108,7 +108,7 @@ export default function Home() {
       </div>
 
       {isOn && (
-        <div className="absolute top-10 left-[30%] z-10 transpa">
+        <div className="absolute top-10 left-[30%] z-10 ">
           <EmailSignUpSnippet onclick={toggler}/>
         </div>
       )}
