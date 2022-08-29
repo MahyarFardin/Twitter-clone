@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { AiOutlineClose, AiOutlineArrowLeft } from "react-icons/ai";
+import { useState } from "react";
+import { randomNumber } from "../../pages/api/index";
+import { sendMail } from "../../pages/api/verification";
 import FirstPageButton from "../FirstPageButton/FirstPageButton";
 import ESUSO from "../1ESUS/ESUSO.component";
 import ESUST from "../2ESUS/ESUST.component";
 import ESUSTh from "../3ESUS/ESUSTh.component";
-import ESUSF from "../4ESUS/ESUSF.component"
+import ESUSF from "../4ESUS/ESUSF.component";
 
 function EmailSignUpSnippet(props) {
   const [number, setNumber] = useState(1);
@@ -33,20 +35,20 @@ function EmailSignUpSnippet(props) {
   let days: number[] = [];
 
   interface information {
-    name: string,
-    Phone: string,
-    Email: string,
-    type: string,
-    day: number,
-    month: string,
-    year: number,
+    name: string;
+    Phone: string;
+    Email: string;
+    type: string;
+    day: number;
+    month: string;
+    year: number;
     privacy: {
-      MP: boolean,
-      GMOT: boolean,
-      PA: boolean,
-    },
-    verified: boolean,
-    password:string
+      MP: boolean;
+      GMOT: boolean;
+      PA: boolean;
+    };
+    verified: boolean;
+    password: string;
   }
 
   const [information, setInformation] = useState<information>({
@@ -68,7 +70,7 @@ function EmailSignUpSnippet(props) {
       PA: false,
     },
     verified: false,
-    password:""
+    password: "",
   });
 
   const assigner = () => {
@@ -108,8 +110,10 @@ function EmailSignUpSnippet(props) {
         ...prev,
         [`privacy.${name}`]: event.target.value,
       }));
-    } else if (number === 3 && code === "123456") {
-      setInformation((prev) => ({ ...prev, verified: true }));
+    } else if (number === 3) {
+      //sendMail(information.Email);
+      if (+code === randomNumber)
+        setInformation((prev) => ({ ...prev, verified: true }));
     }
   };
 

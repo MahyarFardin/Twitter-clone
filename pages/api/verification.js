@@ -1,10 +1,10 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
-import email from "./index"
+const email = "./index";
 
 const server = express();
 
-export function sendMail(reciver) {
+module.export = function sendMail(reciver) {
   var transport = nodemailer.createTransport({
     host: "smtp.mailtrap.io",
     port: 2525,
@@ -17,8 +17,8 @@ export function sendMail(reciver) {
   const option = {
     from: "mahyarfardinfar@gmail.com",
     to: reciver,
-    subject:"verification email",
-    html: email
+    subject: "verification email",
+    html: email,
   };
 
   transport.sendMail(option, function (e, data) {
@@ -27,5 +27,5 @@ export function sendMail(reciver) {
     }
     console.log("email sent , data :" + data);
   });
-}
-server.listen(3000, () => console.log("Using NEV on port 3000"));
+};
+server.listen(3001, () => console.log("Using NEV on port 3001"));

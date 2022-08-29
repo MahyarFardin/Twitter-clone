@@ -1,3 +1,4 @@
+export const randomNumber= parseInt(Math.random() * 1000000)
 export const email=`<!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +16,8 @@ export const email=`<!DOCTYPE html>
 </body>
 <script>
     const codeTag = document.getElementsByClassName("code")[0]
-    codeTag.innerHTML = parseInt(Math.random() * 1000000)
+    codeTag.innerHTML = ${randomNumber}
 </script>
 
 </html>`
+
